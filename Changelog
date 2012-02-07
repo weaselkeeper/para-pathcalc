@@ -1,0 +1,12 @@
+ChangeLog
+Revision 0.0.4:
+  Changed step size of various variable to be equal to
+the variable minimum.
+Revision 0.0.3:
+  Bugfree, narrowed the limits to make more useful
+in the low GHz bands (<10GHz)
+
+Revision 0.0.2:
+  Bugfree, simple, first public release
+
+
