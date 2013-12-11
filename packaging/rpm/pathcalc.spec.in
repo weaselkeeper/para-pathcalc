@@ -1,7 +1,7 @@
-Name:           someproject
+Name:           pathcalc
 Version:        VERSION
 Release:        RELEASE
-Summary:        A few python scripts that do something
+Summary:        A tcl script for parabolic antenna path calculation
 License:        GPLv2
 URL:            https://github.com/weaselkeeper/%{name}
 Group:          System Environment/Base
@@ -9,14 +9,10 @@ Source0:        %{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-Requires:       python
-Requires:       rpm-python
-Requires:       python-argparse
-Requires:       python-simplejson
+Requires:       tcl
 
 %description
-A few utilities to ???
-repos.
+A script for path loss calculations of parabolic antenna setups.
 
 %prep
 %setup -q -n %{name}
@@ -28,12 +24,12 @@ rm -rf %{buildroot}
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/%{name}
 #%{__mkdir_p} %{buildroot}%{_datadir}/%{name}/plugins
 %{__mkdir_p} %{buildroot}%{_localstatedir}/log/%{name}
-#cp -r ./plugins/*.py %{buildroot}%{_datadir}/%{name}/plugins/
-cp -r ./*.py %{buildroot}%{_bindir}/
+#cp -r ./plugins/*.tcl %{buildroot}%{_datadir}/%{name}/plugins/
+cp -r ./*.tcl %{buildroot}%{_bindir}/
 cp -r ./*.conf %{buildroot}%{_sysconfdir}/%{name}
 
 %files
-%{_bindir}/*.py
+%{_bindir}/*.tcl
 %{_sysconfdir}/%{name}/*
 #%{_datadir}/%{name}/*
 

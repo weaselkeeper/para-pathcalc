@@ -3,10 +3,10 @@
 # Source: <source package name; defaults to package name>
 Section: misc
 Priority: optional
-Homepage: https://github.com/weaselkeeper/python-project-template
+Homepage: https://github.com/weaselkeeper/para-pathcalc.git
 Standards-Version: 3.9.2
 
-Package: someproject
+Package: pathcalc
 Version: VERSION
 Maintainer: FULLNAME <EMAIL>
 Depends: python
@@ -14,11 +14,11 @@ Architecture: all
 Copyright: LICENSE
 # Changelog: <changelog file; defaults to a generic changelog>
 Readme: README.md
-Files: someproject.conf /etc/someproject
- someproject.py /usr/bin
+Files: pathcalc.conf /etc/pathcalc
+ pathcalc.tcl /usr/bin
 
-Description: Basic python project template, this is the debian part
- Basic python project template
+Description: Parabolic antenna pair path loss calculator.
+ Calculate figures of merit for path loss/gain between two parabolic antenna
  .
- and more details about notional project
+ Including path gain, 3db point, fresnel zone, etc.
 
