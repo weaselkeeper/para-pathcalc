@@ -84,6 +84,19 @@ set para_gain 1
 set path_loss 1
 
 
+#frame for freq
+frame .freq -width 400 -height 20 -bd 10
+label .freq.freek -text "freq"
+
+button .freq.freq_minus -text "-" -command {min_freq 0.5}
+scale .freq.freq -orient horiz -from $min_freq -to $max_freq \
+	-resolution 0.1 -variable $freq \
+	-label "Frequency  GHz" -command {freq_change}
+button .freq.freq_plus -text "+" -command {min_freq 2 }
+pack .freq
+foreach widgets {freq_minus freq freq_plus } {
+pack .freq.$widgets -side top
+}
 
 #frame for sliders
 frame .main -width 400 -height 200 -bd 10
@@ -100,15 +113,10 @@ scale .main.fresnel -orient horiz -from 0 -to 50 \
 	-resolution .5 -variable $fresnel \
 	-label "Fresnel spot  % " -command {change_fresnel}
 
-scale .main.freq -orient horiz -from $min_freq -to $max_freq \
-	-resolution 0.1 -variable $freq \
-	-label "Frequency  GHz" -command {freq_change}\
-	
-
-pack .main
-foreach widgets  {fresnel dia freq path } {
+foreach widgets  {fresnel dia path } {
 pack .main.$widgets -side top
 }
+
 
 frame .results
 frame .results.labels
@@ -155,6 +163,15 @@ pack .results.values.$values -side top
 	}
 
 
+# Changing variables here
+proc min_freq {adjust} {
+	global min_freq
+	puts $min_freq
+	puts $adjust
+	set min_freq [expr $min_freq * $adjust ]
+	puts $min_freq
+	}
+
 #Calculations begin here
 #
 proc pathloss {} {
@@ -174,14 +191,14 @@ proc near_zone {} {
 	}
 
 proc parabolic_gain {} {
-	global para_gain para_dia freq 
+	global para_gain para_dia freq
 	set para_gain [format %2.2f \
 		[expr (20*log10($para_dia)+20*log10($freq)+17.8)]]
 	total_path_att
 	}
 
 proc fresnel_zone1 {} {
-	global n_zone z1 freq  path_length f_zone 
+	global n_zone z1 freq  path_length f_zone
 	set d1 [expr $path_length*$f_zone/100]
 	set d2 [expr $path_length-$d1]
 	set z1 [format %2.2f \
@@ -235,7 +252,7 @@ proc dist_change {new_length} {
 
 
 proc change_fresnel {d1} {
-	global f_zone 
+	global f_zone
 	set f_zone $d1
 	fresnel_zone1
 	}
