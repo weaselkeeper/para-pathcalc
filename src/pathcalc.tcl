@@ -84,23 +84,6 @@ set para_gain 1
 set path_loss 1
 
 
-#frame for freq
-global min_freq max_freq freq
-frame .freq -width 400 -height 20 -bd 10
-label .freq.freek -text "freq"
-scale .freq.freq -orient horiz -from $min_freq -to $max_freq \
-	-resolution 0.1 -variable $freq \
-	-label "Frequency  GHz" -command {freq_change}
-button .freq.min_freq_minus -text "-" -command {min_freq 0.5}
-button .freq.min_freq_plus -text "+" -command {min_freq 2 }
-button .freq.max_freq_minus -text "-" -command {max_freq 0.5}
-button .freq.max_freq_plus -text "+" -command {max_freq 2 }
-pack .freq
-foreach widgets {min_freq_minus min_freq_plus freq max_freq_minus max_freq_plus} {
-pack .freq.$widgets -side left
-}
-pack info .freq
-
 #frame for sliders
 
 frame .main -width 400 -height 200 -bd 10
@@ -121,6 +104,23 @@ pack .main
 foreach widgets  {fresnel dia path } {
 pack .main.$widgets -side top
 }
+
+#frame for freq
+global min_freq max_freq freq
+frame .freq -width 400 -height 20 -bd 10
+label .freq.freek -text "freq"
+scale .freq.freq -orient horiz -from $min_freq -to $max_freq \
+	-resolution 0.1 -variable $freq \
+	-label "Frequency  GHz" -command {freq_change}
+button .freq.min_freq_minus -text "-" -command {min_freq 0.5}
+button .freq.min_freq_plus -text "+" -command {min_freq 2 }
+button .freq.max_freq_minus -text "-" -command {max_freq 0.5}
+button .freq.max_freq_plus -text "+" -command {max_freq 2 }
+pack .freq
+foreach widgets {min_freq_minus min_freq_plus freq max_freq_minus max_freq_plus} {
+pack .freq.$widgets -side left
+}
+pack info .freq
 
 
 frame .results
@@ -172,13 +172,13 @@ pack .results.values.$values -side top
 proc min_freq {adjust} {
 	global min_freq
 	set min_freq [expr $min_freq * $adjust ]
-	freqpacking
+	.freq.freq configure -from $min_freq
 	}
 
 proc max_freq {adjust} {
 	global max_freq
 	set max_freq [expr $max_freq * $adjust ]
-	freqpacking
+	.freq.freq configure -to $max_freq
 	}
 
 #Calculations begin here
