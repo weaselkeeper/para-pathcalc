@@ -83,23 +83,33 @@ set n_zone 0
 set para_gain 1
 set path_loss 1
 
-
 #frame for sliders
 
 frame .main -width 400 -height 200 -bd 10
 label .main.welcome -text "Welcome"
-
-scale .main.path -orient horiz -from $min_path -to $max_path\
-	-resolution $min_path -variable $path_length \
-	-label "Path Km" -command {dist_change}
-
 scale .main.fresnel -orient horiz -from 0 -to 50 \
 	-resolution .5 -variable $fresnel \
 	-label "Fresnel spot  % " -command {change_fresnel}
 
 pack .main
-foreach widgets  {fresnel path } {
+foreach widgets  {fresnel} {
 pack .main.$widgets -side top
+}
+
+#Frame for path
+global min_path max_path path_length
+frame .path -width 400 -height 20 -bd 10
+label .path.label -text "Path in Km"
+scale .path.pathlength -orient horiz -from $min_path -to $max_path\
+	-resolution $min_path -variable $path_length \
+	-label "Path Km" -command {dist_change}
+button .path.min_path_minus -text "-" -command {min_path 0.5}
+button .path.min_path_plus -text "+" -command {min_path 2 }
+button .path.max_path_minus -text "-" -command {max_path 0.5}
+button .path.max_path_plus -text "+" -command {max_path 2 }
+pack .path
+foreach widgets {min_path_minus min_path_plus pathlength max_path_minus max_path_plus} {
+pack .path.$widgets -side left
 }
 
 #frame for dish diameter
@@ -204,6 +214,18 @@ proc max_dia {adjust} {
 	global max_dia
 	set max_dia [expr $max_dia * $adjust ]
 	.dish.dia configure -to $max_dia
+	}
+
+proc min_path {adjust} {
+	global min_path
+	set min_path [expr $min_path * $adjust ]
+	.path.pathlength configure -from $min_path
+	}
+
+proc max_path {adjust} {
+	global max_path
+	set max_path [expr $max_path * $adjust ]
+	.path.pathlength configure -to $max_path
 	}
 
 
