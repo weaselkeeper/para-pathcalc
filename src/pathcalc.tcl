@@ -88,9 +88,6 @@ set path_loss 1
 
 frame .main -width 400 -height 200 -bd 10
 label .main.welcome -text "Welcome"
-scale .main.dia -orient horiz -from  $min_dia -to $max_dia \
-	-resolution $min_dia -variable $para_dia \
-	-label "Dish Dia. m" -command {dia_change} 
 
 scale .main.path -orient horiz -from $min_path -to $max_path\
 	-resolution $min_path -variable $path_length \
@@ -101,8 +98,24 @@ scale .main.fresnel -orient horiz -from 0 -to 50 \
 	-label "Fresnel spot  % " -command {change_fresnel}
 
 pack .main
-foreach widgets  {fresnel dia path } {
+foreach widgets  {fresnel path } {
 pack .main.$widgets -side top
+}
+
+#frame for dish diameter
+global min_dia max_dia
+frame .dish -width 400 -height 20 -bd 10
+label .dish.label -text "Dia"
+scale .dish.dia -orient horiz -from  $min_dia -to $max_dia \
+	-resolution $min_dia -variable $para_dia \
+	-label "Dish Dia. m" -command {dia_change}
+button .dish.min_dia_minus -text "-" -command {min_dia 0.5}
+button .dish.min_dia_plus -text "+" -command {min_dia 2 }
+button .dish.max_dia_minus -text "-" -command {max_dia 0.5}
+button .dish.max_dia_plus -text "+" -command {max_dia 2 }
+pack .dish
+foreach widgets {min_dia_minus min_dia_plus dia max_dia_minus max_dia_plus} {
+pack .dish.$widgets -side left
 }
 
 #frame for freq
@@ -180,6 +193,19 @@ proc max_freq {adjust} {
 	set max_freq [expr $max_freq * $adjust ]
 	.freq.freq configure -to $max_freq
 	}
+
+proc min_dia {adjust} {
+	global min_dia
+	set min_dia [expr $min_dia * $adjust ]
+	.dish.dia configure -from $min_dia
+	}
+
+proc max_dia {adjust} {
+	global max_dia
+	set max_dia [expr $max_dia * $adjust ]
+	.dish.dia configure -to $max_dia
+	}
+
 
 #Calculations begin here
 #
