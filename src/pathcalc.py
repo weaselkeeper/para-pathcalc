@@ -1,7 +1,7 @@
 #!/usr/bin/env	python
 #
 #
-#Copyright (C) 2000 Jim Richardson 
+#Copyright (C) 2000 Jim Richardson
 #email	weaselkeeper@gmail.com
 #
 # This program is free software; you can redistribute it and/or
@@ -34,11 +34,19 @@
 #Most of the calculations come from a GTE microwave journal
 #that is over 30 years old :) Information is forever.
 #
-#Comments, bug notices, feature lists are welcome at 
+#Comments, bug notices, feature lists are welcome at
 #weaselkeeper@gmail.com, please direct flames to /dev/null, I will...
 
 
 # Reimplementation of pathcalc in python+tkinter
+
+"""
+
+License: GPL V2 See LICENSE file
+Author: Jim Richardson
+email: weaselkeeper@gmail.com
+
+"""
 
 VERSION = 0.01
 
@@ -49,16 +57,18 @@ Title = "Parabolic Path Calculator. Rev. %S", VERSION
 
 class PathCalc():
 
-def __init__(self)
-    """ Set some basic starting limits """
-    self.min_freq = 0.1
-    self.max_freq = 10
-    self.min_path = 0.05
-    self.max_path = 10
-    self.min_dia = 0.1
-    self.max_dia = 1.2
+    def __init__(self):
+        """ Set some basic starting limits """
+        self.min_freq = 0.1
+        self.max_freq = 10
+        self.min_path = 0.05
+        self.max_path = 10
+        self.min_dia = 0.1
+        self.max_dia = 1.2
 
-""" orig tcltk code for ref 
+
+
+""" orig tcltk code for ref
 
 #Set some defaults
 #Units are metric
@@ -143,7 +153,7 @@ frame .results.values
 pack .results
 pack .results.labels -side left
   label .results.labels.para_gain -text "Para Gain (db)"
-  label .results.labels.loss  -text "Path Loss (db)" 
+  label .results.labels.loss  -text "Path Loss (db)"
   label .results.labels.f_zone -text "Fresnel Zone (m)"
   label .results.labels.n_zone -text "Near Zone (m)"
   label .results.labels.total_path_att -text "Total Path Gain (db)"
@@ -163,10 +173,10 @@ pack .results.values -side right
 
 	label .results.values.f_zone -width 10 \
 		-relief groove -textvariable z1
-	
+
 	label .results.values.n_zone -width 10 \
 		-relief groove -textvariable n_zone
-	
+
 	label .results.values.total_path_att -width 10 \
 		-relief groove -textvariable path_att
 
@@ -265,25 +275,25 @@ proc lambda {} {
 
 #######################################33
 
-proc dia_change {new_dia} { 
-	#recalc all the parameters that are affected by 
-	#change in parabolic diameter eg parabolic gain 
+proc dia_change {new_dia} {
+	#recalc all the parameters that are affected by
+	#change in parabolic diameter eg parabolic gain
 	#and near zone, also total path gain via parabolic gain
-	
+
 	global freq para_dia n_zone para_gain
 	set para_dia $new_dia
 	near_zone
-	parabolic_gain 
+	parabolic_gain
 	3db_theta
 	}
 
 proc freq_change {new_freq} {
-	#Recalc all the paramaters which are affected by 
+	#Recalc all the paramaters which are affected by
 	#changes in the freq  eg all of them
 	global freq
 	set freq $new_freq
-	near_zone 
-	parabolic_gain 
+	near_zone
+	parabolic_gain
 	pathloss
 	fresnel_zone1
 	3db_theta
@@ -294,7 +304,7 @@ proc dist_change {new_length} {
 
 	global path_length
 	set path_length $new_length
-	pathloss 
+	pathloss
 	fresnel_zone1
 	}
 
