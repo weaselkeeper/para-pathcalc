@@ -73,6 +73,8 @@ log = logging.getLogger(PROJECTNAME)
 #
 
 class PathCalc():
+    """ Instantiate a path calc object """
+    log.debug(' in class PathCalc')
 
     def __init__(self):
         """ Set some basic starting limits """
@@ -82,6 +84,14 @@ class PathCalc():
         self.max_path = 10
         self.min_dia = 0.1
         self.max_dia = 1.2
+
+
+
+    def run(self):
+        """ Execute the run method """
+        log.debug('In run()')
+
+
 
 
 
