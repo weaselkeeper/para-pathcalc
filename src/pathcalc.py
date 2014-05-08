@@ -50,7 +50,24 @@ email: weaselkeeper@gmail.com
 
 VERSION = 0.01
 
-Title = "Parabolic Path Calculator. Rev. %S", VERSION
+PROJECTNAME = 'pathcalc'
+
+import os
+import sys
+from ConfigParser import SafeConfigParser
+import logging
+
+# Setup logging
+logging.basicConfig(level=logging.WARN,
+                    format='%(asctime)s %(levelname)s - %(message)s',
+                    datefmt='%y.%m.%d %H:%M:%S')
+
+# Setup logging to console.
+console = logging.StreamHandler(sys.stderr)
+console.setLevel(logging.WARN)
+logging.getLogger(PROJECTNAME).addHandler(console)
+log = logging.getLogger(PROJECTNAME)
+
 
 #set upper and lower limits for freq, path length etc
 #
