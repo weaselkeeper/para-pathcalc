@@ -55,6 +55,7 @@ PROJECTNAME = 'pathcalc'
 import os
 import sys
 from ConfigParser import SafeConfigParser
+import Tkinter as Tk
 import logging
 
 # Setup logging
@@ -90,7 +91,6 @@ class PathCalc():
     def run(self):
         """ Execute the run method """
         log.debug('In run()')
-
 
 
 
