@@ -85,7 +85,7 @@ class PathCalc:
         self.max_path = 10
         self.min_dia = 0.1
         self.max_dia = 1.2
-        self.title = 'New Title'
+        self.title = 'Parapath Calculator'
 
     def run(self):
         """ Execute the run method """
@@ -97,6 +97,9 @@ class PathCalc:
         """ Draw the canvas """
         log.debug(' in drawCanvas')
         root = Tk.Tk()
+        var = Tk.StringVar()
+        var.set(self.title)
+        Tk.Label(root, textvariable=var).pack()
         Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
 
