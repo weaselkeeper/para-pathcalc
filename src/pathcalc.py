@@ -97,7 +97,7 @@ class PathCalc:
         """ Draw the canvas """
         log.debug(' in drawCanvas')
         root = Tk.Tk()
-        Tk.Button(root, text="Quit", command=lambda root=root:quit(root)).pack()
+        Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
 
 
