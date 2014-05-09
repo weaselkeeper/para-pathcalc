@@ -73,7 +73,7 @@ log = logging.getLogger(PROJECTNAME)
 #set upper and lower limits for freq, path length etc
 #
 
-class PathCalc():
+class PathCalc:
     """ Instantiate a path calc object """
     log.debug(' in class PathCalc')
 
@@ -85,8 +85,7 @@ class PathCalc():
         self.max_path = 10
         self.min_dia = 0.1
         self.max_dia = 1.2
-
-
+        self.title = 'New Title'
 
     def run(self):
         """ Execute the run method """
@@ -94,6 +93,18 @@ class PathCalc():
 
 
 
+    def drawCanvas(self):
+        """ Draw the canvas """
+        log.debug(' in drawCanvas')
+        root = Tk.Tk()
+        Tk.Button(root, text="Quit", command=lambda root=root:quit(root)).pack()
+        root.mainloop()
+
+
+
+
+canvas = PathCalc()
+canvas.drawCanvas()
 
 """ orig tcltk code for ref
 
