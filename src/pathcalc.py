@@ -52,7 +52,6 @@ VERSION = 0.01
 
 PROJECTNAME = 'pathcalc'
 
-import os
 import sys
 from ConfigParser import SafeConfigParser
 import Tkinter as Tk
