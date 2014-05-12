@@ -72,7 +72,7 @@ log = logging.getLogger(PROJECTNAME)
 #set upper and lower limits for freq, path length etc
 #
 
-class PathCalc:
+class PathCalc(object):
     """ Instantiate a path calc object """
     log.debug(' in class PathCalc')
 
