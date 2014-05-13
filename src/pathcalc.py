@@ -53,7 +53,7 @@ VERSION = 0.01
 PROJECTNAME = 'pathcalc'
 
 import sys
-from ConfigParser import SafeConfigParser
+import ConfigParser
 import Tkinter as Tk
 import logging
 
