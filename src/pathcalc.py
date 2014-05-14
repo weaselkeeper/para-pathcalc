@@ -53,6 +53,7 @@ VERSION = 0.01
 PROJECTNAME = 'pathcalc'
 
 import sys
+import os
 import ConfigParser
 import Tkinter as Tk
 import logging
@@ -107,15 +108,31 @@ class PathCalc(object):
 def get_options():
     """ Parse for any options """
     log.debug('in get_options')
+    # Default config file
+    configfile = os.path.join('/etc', PROJECTNAME, PROJECTNAME + '.conf')
     import argparse
     parser = argparse.ArgumentParser(
         description='This is a Parabolic dish path calculator.')
     parser.add_argument('-f', '--file', action='store', default=None,
         help='Input file', dest='inputfile')
+    parser.add_argument('-c', '--config', action='store', help='Config file')
     parser.add_argument('-d', '--debug', action='store_true',
         help='enable debugging')
     _args = parser.parse_args()
     _args.usage = PROJECTNAME + ".py [options]"
+
+    # If we specify a config, then we use it, if not, we go with supplied options
+    if _args.config:
+        config = ConfigParser.SafeConfigParser()
+        _config = _args.config
+        config.read(_config)
+    else:
+        if os.path.isfile(configfile):
+            config = ConfigParser.SafeConfigParser()
+            config.read(configfile)
+        else:
+            log.warn('No config file found, continue with args passed')
+            
     log.debug('leaving get_options')
     return _args
 
