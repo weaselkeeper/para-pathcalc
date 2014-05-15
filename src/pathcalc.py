@@ -79,12 +79,7 @@ class PathCalc(object):
 
     def __init__(self):
         """ Set some basic starting limits """
-        self.min_freq = 0.1
-        self.max_freq = 10
-        self.min_path = 0.05
-        self.max_path = 10
-        self.min_dia = 0.1
-        self.max_dia = 1.2
+        self = read_config(self)
         self.title = 'Parapath Calculator'
 
     def run(self):
@@ -109,7 +104,6 @@ def get_options():
     """ Parse for any options """
     log.debug('in get_options')
     # Default config file
-    configfile = os.path.join('/etc', PROJECTNAME, PROJECTNAME + '.conf')
     import argparse
     parser = argparse.ArgumentParser(
         description='This is a Parabolic dish path calculator.')
@@ -122,21 +116,32 @@ def get_options():
     _args.usage = PROJECTNAME + ".py [options]"
 
     # If we specify a config, then we use it, if not, we go with supplied options
-    if _args.config:
-        config = ConfigParser.SafeConfigParser()
-        _config = _args.config
-        config.read(_config)
-    else:
-        if os.path.isfile(configfile):
-            config = ConfigParser.SafeConfigParser()
-            config.read(configfile)
-        else:
-            log.warn('No config file found, continue with args passed')
-            
     log.debug('leaving get_options')
     return _args
 
 
+def read_config(object):
+    """ We will now pass the config settings into the object """
+    log.debug('In read_config')
+    configfile = os.path.join('/etc', PROJECTNAME, PROJECTNAME + '.conf')
+    config = ConfigParser.SafeConfigParser()
+    if args.config:
+        _config = args.config
+        config.read(_config)
+    else:
+        if os.path.isfile(configfile):
+            config.read(configfile)
+        else:
+            log.warn('No config file found, continue with args passed')
+            sys.exit(1)
+
+    object.min_freq = config.get('Default', 'FreqMin')
+    object.max_freq = config.get('Default', 'FreqMax')
+    object.min_dia = config.get('Default', 'DiaMin')
+    object.max_dia = config.get('Default', 'DiaMax')
+    object.min_path = config.get('Default', 'PathMin')
+    object.max_path = config.get('Default', 'PathMax')
+    return object
 
 if __name__ == '__main__':
     # This is where we will begin when called from CLI. No need for argparse
