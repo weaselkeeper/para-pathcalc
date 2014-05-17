@@ -48,8 +48,6 @@ email: weaselkeeper@gmail.com
 
 """
 
-VERSION = 0.01
-
 PROJECTNAME = 'pathcalc'
 
 import sys
