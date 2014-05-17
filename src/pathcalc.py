@@ -120,7 +120,7 @@ def get_options():
     return _args
 
 
-def read_config(object):
+def read_config(_object):
     """ We will now pass the config settings into the object """
     log.debug('In read_config')
     configfile = os.path.join('/etc', PROJECTNAME, PROJECTNAME + '.conf')
@@ -135,13 +135,13 @@ def read_config(object):
             log.warn('No config file found, continue with args passed')
             sys.exit(1)
 
-    object.min_freq = config.get('Default', 'FreqMin')
-    object.max_freq = config.get('Default', 'FreqMax')
-    object.min_dia = config.get('Default', 'DiaMin')
-    object.max_dia = config.get('Default', 'DiaMax')
-    object.min_path = config.get('Default', 'PathMin')
-    object.max_path = config.get('Default', 'PathMax')
-    return object
+    _object.min_freq = config.get('Default', 'FreqMin')
+    _object.max_freq = config.get('Default', 'FreqMax')
+    _object.min_dia = config.get('Default', 'DiaMin')
+    _object.max_dia = config.get('Default', 'DiaMax')
+    _object.min_path = config.get('Default', 'PathMin')
+    _object.max_path = config.get('Default', 'PathMax')
+    return _object
 
 if __name__ == '__main__':
     # This is where we will begin when called from CLI. No need for argparse
