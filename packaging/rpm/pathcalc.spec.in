@@ -9,7 +9,7 @@ Source0:        %{name}-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-Requires:       tcl
+Requires:       tcl, python,tk
 
 %description
 A script for path loss calculations of parabolic antenna setups.
@@ -26,10 +26,12 @@ rm -rf %{buildroot}
 %{__mkdir_p} %{buildroot}%{_localstatedir}/log/%{name}
 #cp -r ./plugins/*.tcl %{buildroot}%{_datadir}/%{name}/plugins/
 cp -r ./*.tcl %{buildroot}%{_bindir}/
+cp -r ./*.py %{buildroot}%{_bindir}/
 cp -r ./*.conf %{buildroot}%{_sysconfdir}/%{name}
 
 %files
 %{_bindir}/*.tcl
+%{_bindir}/*.py
 %{_sysconfdir}/%{name}/*
 #%{_datadir}/%{name}/*
 

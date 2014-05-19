@@ -9,14 +9,14 @@ Standards-Version: 3.9.2
 Package: pathcalc
 Version: VERSION
 Maintainer: FULLNAME <EMAIL>
-Depends: python
+Depends: python,tcl,tk
 Architecture: all
 Copyright: LICENSE
 # Changelog: <changelog file; defaults to a generic changelog>
 Readme: README.md
 Files: pathcalc.conf /etc/pathcalc
  pathcalc.tcl /usr/bin
-
+ pathcalc.py /usr/bin
 Description: Parabolic antenna pair path loss calculator.
  Calculate figures of merit for path loss/gain between two parabolic antenna
  .
