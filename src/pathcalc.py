@@ -121,11 +121,27 @@ class PathCalc(object):
         root.mainloop()
 
 
+def lambdaCalc(freq):
+    """ Calculating lambda (wavelength) """
+    log.debug('in lambdaCalc')
+    _lambda = 300.00/freq
+    log.debug('leaving lambdaCalc')
+    return _lambda
+
+
+def threedb_theta(freq, para_dia):
+    """ Calculating the 3db theta point """
+    log.debug('In threedb_theta')
+    _3db_theta = 22.00/freq*para_dia
+    log.debug('leaving threedb_theta')
+    return _3db_theta
+
+
 def paraGain(opts):
     """ Calculating the dish gain per side """
     log.debug('in paraGain calculation')
-    para_gain = (20*math.log(10, opts['dia']))+(20*math.log(10, opts['freq']+17.8))
-    return para_gain
+    _para_gain = (20*math.log(10, opts['dia']))+(20*math.log(10, opts['freq']+17.8))
+    return _para_gain
 
 
 def get_options():
