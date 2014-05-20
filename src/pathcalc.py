@@ -94,9 +94,15 @@ class PathCalc(object):
         var = Tk.StringVar()
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
+        Tk.Scale(root,
+                from_=0.1,
+                to=10.0,
+                resolution = 0.1,
+                orient='horizontal',
+                length=250,
+                ).pack()
         Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
-
 
 def get_options():
     """ Parse for any options """
