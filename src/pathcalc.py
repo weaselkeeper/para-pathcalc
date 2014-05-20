@@ -85,6 +85,15 @@ class PathCalc(object):
         log.debug('In run()')
         self.drawCanvas()
 
+    def drawSlider(self, window):
+        Tk.Scale(window,
+                label='Second slider',
+                from_=0.1,
+                to=10.0,
+                resolution = 0.1,
+                orient='horizontal',
+                length=250,
+                ).pack()
 
 
     def drawCanvas(self):
@@ -94,13 +103,7 @@ class PathCalc(object):
         var = Tk.StringVar()
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
-        Tk.Scale(root,
-                from_=0.1,
-                to=10.0,
-                resolution = 0.1,
-                orient='horizontal',
-                length=250,
-                ).pack()
+        self.drawSlider(root)
         Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
 
