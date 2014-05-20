@@ -55,7 +55,7 @@ import os
 import ConfigParser
 import Tkinter as Tk
 import logging
-
+import math
 # Setup logging
 logging.basicConfig(level=logging.WARN,
                     format='%(asctime)s %(levelname)s - %(message)s',
@@ -115,10 +115,18 @@ class PathCalc(object):
         var = Tk.StringVar()
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
-        slider_opts={'label':'Test label','min_freq':0.1, 'max_freq':15}
+        slider_opts = {'label':'Test label', 'min_freq':0.1, 'max_freq':15}
         self.drawSlider(root, slider_opts)
         Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
+
+
+def paraGain(opts):
+    """ Calculating the dish gain per side """
+    log.debug('in paraGain calculation')
+    para_gain = (20*math.log(10, opts['dia']))+(20*math.log(10, opts['freq']+17.8))
+    return para_gain
+
 
 def get_options():
     """ Parse for any options """
