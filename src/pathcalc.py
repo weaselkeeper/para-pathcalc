@@ -137,11 +137,16 @@ def threedb_theta(freq, para_dia):
     return _3db_theta
 
 
-def paraGain(opts):
+def paraGain(dia, freq):
     """ Calculating the dish gain per side """
     log.debug('in paraGain calculation')
-    _para_gain = (20*math.log(10, opts['dia']))+(20*math.log(10, opts['freq']+17.8))
+    _para_gain = (20*math.log(10, dia)+(20*math.log(10, freq)+17.8))
     return _para_gain
+
+
+def pathloss(path_length, freq):
+    _path_loss =  (92.4+20*math.log(10, freq)+20*math.log(10, path_length))
+    return _path_loss
 
 
 def get_options():
@@ -200,3 +205,5 @@ if __name__ == '__main__':
 
     canvas = PathCalc()
     canvas.run()
+
+    opts = read_config(canvas)
