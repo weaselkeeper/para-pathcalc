@@ -85,7 +85,7 @@ class PathCalc(object):
         log.debug('In run()')
         self.drawCanvas()
 
-    def drawSlider(self, window,opts={}):
+    def drawSlider(self, window, opts={}):
         if 'min_freq' in opts:
             minfreq = opts['min_freq']
         else:
@@ -99,14 +99,13 @@ class PathCalc(object):
         else:
             _label = 'Default label'
         Tk.Scale(window,
-                label=_label,
-                from_=minfreq,
-                to=maxfreq,
-                resolution = 0.1,
-                orient='horizontal',
-                length=250,
-                ).pack()
-
+                 label=_label,
+                 from_=minfreq,
+                 to=maxfreq,
+                 resolution=0.1,
+                 orient='horizontal',
+                 length=250,
+                 ).pack()
 
     def drawCanvas(self):
         """ Draw the canvas """
@@ -115,7 +114,7 @@ class PathCalc(object):
         var = Tk.StringVar()
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
-        slider_opts = {'label':'Test label', 'min_freq':0.1, 'max_freq':15}
+        slider_opts = {'label': 'Test label', 'min_freq': 0.1, 'max_freq': 15}
         self.drawSlider(root, slider_opts)
         Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
@@ -145,7 +144,7 @@ def paraGain(dia, freq):
 
 
 def pathloss(path_length, freq):
-    _path_loss =  (92.4+20*math.log(10, freq)+20*math.log(10, path_length))
+    _path_loss = (92.4+20*math.log(10, freq)+20*math.log(10, path_length))
     return _path_loss
 
 
@@ -164,7 +163,8 @@ def get_options():
     _args = parser.parse_args()
     _args.usage = PROJECTNAME + ".py [options]"
 
-    # If we specify a config, then we use it, if not, we go with supplied options
+    # If we specify a config, then we use it, if not, we go with supplied
+    # options
     log.debug('leaving get_options')
     return _args
 
