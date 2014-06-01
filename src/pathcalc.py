@@ -86,22 +86,13 @@ class PathCalc(object):
         self.drawCanvas()
 
     def drawSlider(self, window, opts={}):
-        if 'min_freq' in opts:
-            minfreq = opts['min_freq']
-        else:
-            minfreq = 0.1
-        if 'max_freq' in opts:
-            maxfreq = opts['max_freq']
-        else:
-            maxfreq = 10
-        if 'label' in opts:
-            _label = opts['label']
-        else:
-            _label = 'Default label'
+        _min = opts['min']
+        _max = opts['max']
+        _label = opts['label']
         Tk.Scale(window,
                  label=_label,
-                 from_=minfreq,
-                 to=maxfreq,
+                 from_=_min,
+                 to=_max,
                  resolution=0.1,
                  orient='horizontal',
                  length=250,
@@ -114,8 +105,8 @@ class PathCalc(object):
         var = Tk.StringVar()
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
-        for slider in ['freq', 'dia', 'range']:
-            slider_opts = {'label': slider, 'min': 0.1, 'max_'+slider: 15}
+        for slider in ['freq', 'dia', 'range', 'lambda']:
+            slider_opts = {'label': slider, 'min': 0.1, 'max': 15}
             self.drawSlider(root, slider_opts)
 
         Tk.Button(root, text="Quit", command=root.quit).pack()
