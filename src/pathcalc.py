@@ -177,12 +177,12 @@ def read_config(_object):
             log.warn('No config file found, continue with args passed')
             sys.exit(1)
 
-    _object.min_freq = config.get('Default', 'FreqMin')
-    _object.max_freq = config.get('Default', 'FreqMax')
-    _object.min_dia = config.get('Default', 'DiaMin')
-    _object.max_dia = config.get('Default', 'DiaMax')
-    _object.min_path = config.get('Default', 'PathMin')
-    _object.max_path = config.get('Default', 'PathMax')
+    _object.min_freq = config.get('freq', 'Min')
+    _object.max_freq = config.get('freq', 'Max')
+    _object.min_dia = config.get('dia', 'Min')
+    _object.max_dia = config.get('dia', 'Max')
+    _object.min_path = config.get('path', 'Min')
+    _object.max_path = config.get('path', 'Max')
     return _object
 
 if __name__ == '__main__':
@@ -197,6 +197,5 @@ if __name__ == '__main__':
         log.setLevel(logging.WARN)
 
     canvas = PathCalc()
-    canvas.run()
-
     opts = read_config(canvas)
+    canvas.run()
