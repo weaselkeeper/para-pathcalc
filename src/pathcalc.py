@@ -85,10 +85,11 @@ class PathCalc(object):
         log.debug('In run()')
         self.drawCanvas()
 
-    def drawSlider(self, window, opts={}):
-        _min = opts['min']
-        _max = opts['max']
-        _label = opts['label']
+    def drawSlider(self, window, _opts):
+    """ Draw sliders, for all entries in the config """
+        _min = _opts['min']
+        _max = _opts['max']
+        _label = _opts['label']
         Tk.Scale(window,
                  label=_label,
                  from_=_min,
@@ -137,6 +138,7 @@ def paraGain(dia, freq):
 
 
 def pathloss(path_length, freq):
+    """ Calculate the full path loss """
     _path_loss = (92.4+20*math.log(10, freq)+20*math.log(10, path_length))
     return _path_loss
 
