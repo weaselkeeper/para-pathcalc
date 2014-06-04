@@ -86,7 +86,7 @@ class PathCalc(object):
         self.drawCanvas()
 
     def drawSlider(self, window, _opts):
-    """ Draw sliders, for all entries in the config """
+        """ Draw sliders, for all entries in the config """
         _min = _opts['min']
         _max = _opts['max']
         _label = _opts['label']
