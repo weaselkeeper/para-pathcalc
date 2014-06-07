@@ -185,6 +185,7 @@ def read_config(_object):
     _object.max_dia = config.get('dia', 'Max')
     _object.min_path = config.get('path', 'Min')
     _object.max_path = config.get('path', 'Max')
+    sections = config.sections()
     return _object
 
 if __name__ == '__main__':
