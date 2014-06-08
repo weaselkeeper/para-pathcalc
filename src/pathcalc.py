@@ -200,5 +200,4 @@ if __name__ == '__main__':
         log.setLevel(logging.WARN)
 
     canvas = PathCalc()
-    opts = read_config(canvas)
     canvas.run()
