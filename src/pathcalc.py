@@ -186,6 +186,10 @@ def read_config(_object):
     _object.min_path = config.get('path', 'Min')
     _object.max_path = config.get('path', 'Max')
     sections = config.sections()
+    for section in sections:
+        _min = config.get(section, 'Min')
+        _max = config.get(section, 'Max')
+        print section, _min, _max
     return _object
 
 if __name__ == '__main__':
