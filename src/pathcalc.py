@@ -106,8 +106,9 @@ class PathCalc(object):
         var = Tk.StringVar()
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
-        for slider in ['freq', 'dia', 'range', 'lambda']:
-            slider_opts = {'label': slider, 'min': 0.1, 'max': 15}
+        for slider in self.settings:
+            min, max = getattr(self,slider).split(',')
+            slider_opts = {'label': slider, 'min': min, 'max':max }
             self.drawSlider(root, slider_opts)
 
         Tk.Button(root, text="Quit", command=root.quit).pack()
@@ -179,17 +180,11 @@ def read_config(_object):
             log.warn('No config file found, continue with args passed')
             sys.exit(1)
 
-    _object.min_freq = config.get('freq', 'Min')
-    _object.max_freq = config.get('freq', 'Max')
-    _object.min_dia = config.get('dia', 'Min')
-    _object.max_dia = config.get('dia', 'Max')
-    _object.min_path = config.get('path', 'Min')
-    _object.max_path = config.get('path', 'Max')
-    sections = config.sections()
-    for section in sections:
-        _min = config.get(section, 'Min')
-        _max = config.get(section, 'Max')
-        print section, _min, _max
+    items = config.options('default')
+    _object.settings = items
+    for item in items:
+        value = config.get('default', item)
+        setattr(_object,item, value)
     return _object
 
 if __name__ == '__main__':
