@@ -107,7 +107,7 @@ class PathCalc(object):
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
         for slider in self.settings:
-            min, max = getattr(self,slider).split(',')
+            min, max = getattr(self, slider).split(',')
             slider_opts = {'label': slider, 'min': min, 'max':max }
             self.drawSlider(root, slider_opts)
 
@@ -184,7 +184,7 @@ def read_config(_object):
     _object.settings = items
     for item in items:
         value = config.get('default', item)
-        setattr(_object,item, value)
+        setattr(_object, item, value)
     return _object
 
 if __name__ == '__main__':
