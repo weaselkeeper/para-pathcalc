@@ -107,8 +107,8 @@ class PathCalc(object):
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
         for slider in self.settings:
-            min, max = getattr(self, slider).split(',')
-            slider_opts = {'label': slider, 'min': min, 'max': max}
+            _min, _max = getattr(self, slider).split(',')
+            slider_opts = {'label': slider, 'min': _min, 'max': _max}
             self.drawSlider(root, slider_opts)
 
         Tk.Button(root, text="Quit", command=root.quit).pack()
