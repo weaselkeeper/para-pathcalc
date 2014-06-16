@@ -83,7 +83,19 @@ class PathCalc(object):
     def run(self):
         """ Execute the run method """
         log.debug('In run()')
-        self.drawCanvas()
+        """ Draw the canvas """
+        root = Tk.Tk()
+        var = Tk.StringVar()
+        var.set(self.title)
+        Tk.Label(root, textvariable=var).pack()
+        for slider in self.settings:
+            _min, _max = getattr(self, slider).split(',')
+            slider_opts = {'label': slider, 'min': _min, 'max': _max}
+            self.drawSlider(root, slider_opts)
+
+        Tk.Button(root, text="Quit", command=root.quit).pack()
+        root.mainloop()
+
 
     def drawSlider(self, window, _opts):
         """ Draw sliders, for all entries in the config """
@@ -98,21 +110,6 @@ class PathCalc(object):
                  orient='horizontal',
                  length=250,
                  ).pack()
-
-    def drawCanvas(self):
-        """ Draw the canvas """
-        log.debug(' in drawCanvas')
-        root = Tk.Tk()
-        var = Tk.StringVar()
-        var.set(self.title)
-        Tk.Label(root, textvariable=var).pack()
-        for slider in self.settings:
-            _min, _max = getattr(self, slider).split(',')
-            slider_opts = {'label': slider, 'min': _min, 'max': _max}
-            self.drawSlider(root, slider_opts)
-
-        Tk.Button(root, text="Quit", command=root.quit).pack()
-        root.mainloop()
 
 
 def lambdaCalc(freq):
