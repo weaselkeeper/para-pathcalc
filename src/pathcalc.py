@@ -141,6 +141,13 @@ def pathloss(path_length, freq):
     return _path_loss
 
 
+def change_freq(freq):
+    """ when freq changes, recalculate all the stuff that changes as a
+    result"""
+    log.debug('in change_freq')
+    print 'now recalc pathloss, paragain, 3dbTheta and lambda'
+
+
 def get_options():
     """ Parse for any options """
     log.debug('in get_options')
