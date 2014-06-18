@@ -111,6 +111,13 @@ class PathCalc(object):
                  length=250,
                  ).pack()
 
+    def change_freq(self, freq):
+        """ when freq changes, recalculate all the stuff that changes as a
+        result"""
+        log.debug('in change_freq')
+        print 'now recalc pathloss, paragain, 3dbTheta and lambda'
+
+
 
 def lambdaCalc(freq):
     """ Calculating lambda (wavelength) """
@@ -139,13 +146,6 @@ def pathloss(path_length, freq):
     """ Calculate the full path loss """
     _path_loss = (92.4+20*math.log(10, freq)+20*math.log(10, path_length))
     return _path_loss
-
-
-def change_freq(freq):
-    """ when freq changes, recalculate all the stuff that changes as a
-    result"""
-    log.debug('in change_freq')
-    print 'now recalc pathloss, paragain, 3dbTheta and lambda'
 
 
 def get_options():
