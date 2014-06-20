@@ -73,7 +73,6 @@ log = logging.getLogger(PROJECTNAME)
 
 class PathCalc(object):
     """ Instantiate a path calc object """
-    log.debug(' in class PathCalc')
 
     def __init__(self):
         """ Set some basic starting limits """
