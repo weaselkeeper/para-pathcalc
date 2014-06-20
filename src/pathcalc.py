@@ -96,7 +96,6 @@ class PathCalc(object):
         Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
 
-
     def drawSlider(self, window, _opts):
         """ Draw sliders, for all entries in the config """
         _min = _opts['min']
