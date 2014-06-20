@@ -118,33 +118,33 @@ class PathCalc(object):
 
 
 
-def lambdaCalc(freq):
-    """ Calculating lambda (wavelength) """
-    log.debug('in lambdaCalc')
-    _lambda = 300.00/freq
-    log.debug('leaving lambdaCalc')
-    return _lambda
+    def lambdaCalc(self, freq):
+        """ Calculating lambda (wavelength) """
+        log.debug('in lambdaCalc')
+        _lambda = 300.00/freq
+        log.debug('leaving lambdaCalc')
+        return _lambda
 
 
-def threedb_theta(freq, para_dia):
-    """ Calculating the 3db theta point """
-    log.debug('In threedb_theta')
-    _3db_theta = 22.00/freq*para_dia
-    log.debug('leaving threedb_theta')
-    return _3db_theta
+    def threedb_theta(self, freq, para_dia):
+        """ Calculating the 3db theta point """
+        log.debug('In threedb_theta')
+        _3db_theta = 22.00/freq*para_dia
+        log.debug('leaving threedb_theta')
+        return _3db_theta
 
 
-def paraGain(dia, freq):
-    """ Calculating the dish gain per side """
-    log.debug('in paraGain calculation')
-    _para_gain = (20*math.log(10, dia)+(20*math.log(10, freq)+17.8))
-    return _para_gain
+    def paraGain(self, dia, freq):
+        """ Calculating the dish gain per side """
+        log.debug('in paraGain calculation')
+        _para_gain = (20*math.log(10, dia)+(20*math.log(10, freq)+17.8))
+        return _para_gain
 
 
-def pathloss(path_length, freq):
-    """ Calculate the full path loss """
-    _path_loss = (92.4+20*math.log(10, freq)+20*math.log(10, path_length))
-    return _path_loss
+    def pathloss(self, path_length, freq):
+        """ Calculate the full path loss """
+        _path_loss = (92.4+20*math.log(10, freq)+20*math.log(10, path_length))
+        return _path_loss
 
 
 def get_options():
