@@ -100,7 +100,8 @@ class PathCalc(object):
         _min = _opts['min']
         _max = _opts['max']
         _label = _opts['label']
-        Tk.Scale(window,
+        self.window = window
+        slider = Tk.Scale(window,
                  label=_label,
                  from_=_min,
                  to=_max,
