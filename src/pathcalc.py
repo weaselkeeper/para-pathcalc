@@ -113,7 +113,11 @@ class PathCalc(object):
         """ when freq changes, recalculate all the stuff that changes as a
         result"""
         log.debug('in change_freq')
-        print 'now recalc pathloss, paragain, 3dbTheta and lambda'
+        log.warn('now recalc pathloss, paragain, 3dbTheta and lambda')
+        self.paragain()
+        self.threedb_theta()
+        self.lambdaCalc()
+        self. pathloss()
 
 
 
