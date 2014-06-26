@@ -87,28 +87,15 @@ class PathCalc(object):
         var = Tk.StringVar()
         var.set(self.title)
         Tk.Label(root, textvariable=var).pack()
-        for slider in self.settings:
-            _min, _max = getattr(self, slider).split(',')
-            slider_opts = {'label': slider, 'min': _min, 'max': _max}
-            self.drawSlider(root, slider_opts)
+        for variable in self.settings:
+            _min, _max = getattr(self, variable).split(',')
+            slider = Tk.Scale(root, label=variable, from_= _min,
+                     to=_max, resolution=0.1, orient='horizontal',
+                     length=250, command=variable)
+            slider.pack()
 
         Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
-
-    def drawSlider(self, window, _opts):
-        """ Draw sliders, for all entries in the config """
-        _min = _opts['min']
-        _max = _opts['max']
-        _label = _opts['label']
-        self.window = window
-        slider = Tk.Scale(window,
-                 label=_label,
-                 from_=_min,
-                 to=_max,
-                 resolution=0.1,
-                 orient='horizontal',
-                 length=250,
-                 ).pack()
 
     def change_freq(self, freq):
         """ when freq changes, recalculate all the stuff that changes as a
@@ -122,10 +109,12 @@ class PathCalc(object):
 
 
 
-    def lambdaCalc(self, freq):
+    def lambdaCalc(self):
         """ Calculating lambda (wavelength) """
         log.debug('in lambdaCalc')
-        self._lambda = 300.00/freq
+        self._lambda = 300.00/self.freq
+        print self._lambda
+
 
 
     def threedb_theta(self, freq, para_dia):
