@@ -42,12 +42,13 @@
 
 # Reimplementation of pathcalc in python+Wx
 #
-# """
-#
-#License: GPL V2 See LICENSE file
-#Author: Jim Richardson
-#email: weaselkeeper@gmail.com
+"""
+License: GPL V2 See LICENSE file
+Author: Jim Richardson
+email: weaselkeeper@gmail.com
+"""
 
+PROJECTNAME = 'pathcalc'
 
 # Import attempt, dif if fail.
 
@@ -73,6 +74,52 @@ class pathcalc_wx(wx.Frame):
 
     def QuitClick(self, event):
             self.Close()
+
+
+def get_options():
+    """ Parse for any options """
+    log.debug('in get_options')
+    # Default config file
+    import argparse
+    parser = argparse.ArgumentParser(
+        description='This is a Parabolic dish path calculator.')
+    parser.add_argument('-f', '--file', action='store', default=None,
+        help='Input file', dest='inputfile')
+    parser.add_argument('-c', '--config', action='store', help='Config file')
+    parser.add_argument('-d', '--debug', action='store_true',
+        help='enable debugging')
+    _args = parser.parse_args()
+    _args.usage = PROJECTNAME + ".py [options]"
+
+    # If we specify a config, then we use it, if not, we go with supplied
+    # options
+    log.debug('leaving get_options')
+    return _args
+
+
+def read_config(_object):
+    """ We will now pass the config settings into the object """
+    log.debug('In read_config')
+    configfile = os.path.join('/etc', PROJECTNAME, PROJECTNAME + '.conf')
+    config = ConfigParser.SafeConfigParser()
+    if args.config:
+        _config = args.config
+        config.read(_config)
+    else:
+        if os.path.isfile(configfile):
+            config.read(configfile)
+        else:
+            log.warn('No config file found, continue with args passed')
+            sys.exit(1)
+
+    items = config.options('default')
+    _object.settings = items
+    for item in items:
+        value = config.get('default', item)
+        setattr(_object, item, value)
+    return _object
+
+
 if __name__ == "__main__":
     app = wx.App()
     frame = pathcalc_wx(None,-1,'pathcalc')
