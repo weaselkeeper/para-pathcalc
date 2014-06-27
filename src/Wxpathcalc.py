@@ -57,6 +57,24 @@ try:
 except ImportError:
     raise ImportError,"The wxPython module is required to run this program"
 
+# Remaining imports
+import sys
+import os
+import ConfigParser
+import logging
+import math
+# Setup logging
+logging.basicConfig(level=logging.WARN,
+                    format='%(asctime)s %(levelname)s - %(message)s',
+                    datefmt='%y.%m.%d %H:%M:%S')
+
+# Setup logging to console.
+console = logging.StreamHandler(sys.stderr)
+console.setLevel(logging.WARN)
+logging.getLogger(PROJECTNAME).addHandler(console)
+log = logging.getLogger(PROJECTNAME)
+
+
 class pathcalc_wx(wx.Frame):
     def __init__(self,parent,id,title):
         """ Constructor for frame"""
@@ -121,6 +139,12 @@ def read_config(_object):
 
 
 if __name__ == "__main__":
+    args = get_options()
+
+    if args.debug:
+        log.setLevel(logging.DEBUG)
+    else:
+        log.setLevel(logging.WARN)
     app = wx.App()
     frame = pathcalc_wx(None,-1,'pathcalc')
     app.MainLoop()
