@@ -78,6 +78,7 @@ log = logging.getLogger(PROJECTNAME)
 class pathcalc_wx(wx.Frame):
     def __init__(self,parent,id,title):
         """ Constructor for frame"""
+        self = read_config(self)
         wx.Frame.__init__(self,parent,id,title)
         self.parent = parent
         self.initialize()
@@ -88,6 +89,8 @@ class pathcalc_wx(wx.Frame):
         self.Quit.Bind(wx.EVT_BUTTON, self.QuitClick)
         self.Quit.SetToolTip(wx.ToolTip("Click to quit"))
         self.SetSizerAndFit(sizer)
+        for variable in self.settings:
+            # now we add sliders ..
         self.Show(True)
 
     def QuitClick(self, event):
