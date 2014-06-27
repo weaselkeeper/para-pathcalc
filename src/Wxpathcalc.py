@@ -91,6 +91,7 @@ class pathcalc_wx(wx.Frame):
         self.SetSizerAndFit(sizer)
         for variable in self.settings:
             # now we add sliders ..
+            pass
         self.Show(True)
 
     def QuitClick(self, event):
@@ -133,10 +134,10 @@ def read_config(_object):
             log.warn('No config file found, continue with args passed')
             sys.exit(1)
 
-    items = config.options('default')
+    items = config.options('sliders')
     _object.settings = items
     for item in items:
-        value = config.get('default', item)
+        value = config.get('sliders', item)
         setattr(_object, item, value)
     return _object
 
