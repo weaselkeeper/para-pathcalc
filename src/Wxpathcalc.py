@@ -95,7 +95,7 @@ class pathcalc_wx(wx.Frame):
         self.Show(True)
 
     def QuitClick(self, event):
-            self.Close()
+        self.Close()
 
 
 def get_options():
