@@ -55,7 +55,7 @@ PROJECTNAME = 'pathcalc'
 try:
     import wx
 except ImportError:
-    raise ImportError,"The wxPython module is required to run this program"
+    raise ImportError, "The wxPython module is required to run this program"
 
 # Remaining imports
 import sys
@@ -76,16 +76,16 @@ log = logging.getLogger(PROJECTNAME)
 
 
 class pathcalc_wx(wx.Frame):
-    def __init__(self,parent,id,title):
+    def __init__(self, parent, id, title):
         """ Constructor for frame"""
         self = read_config(self)
-        wx.Frame.__init__(self,parent,id,title)
+        wx.Frame.__init__(self, parent, id, title)
         self.parent = parent
         self.initialize()
 
     def initialize(self):
         sizer = wx.GridBagSizer()
-        self.Quit = wx.Button(self, id=-1,label=u"Quit")
+        self.Quit = wx.Button(self, id=-1, label=u"Quit")
         self.Quit.Bind(wx.EVT_BUTTON, self.QuitClick)
         self.Quit.SetToolTip(wx.ToolTip("Click to quit"))
         self.SetSizerAndFit(sizer)
@@ -150,6 +150,5 @@ if __name__ == "__main__":
     else:
         log.setLevel(logging.WARN)
     app = wx.App()
-    frame = pathcalc_wx(None,-1,'pathcalc')
+    frame = pathcalc_wx(None, -1, 'pathcalc')
     app.MainLoop()
-
