@@ -76,6 +76,7 @@ log = logging.getLogger(PROJECTNAME)
 
 
 class pathcalc_wx(wx.Frame):
+    """ Base class, builds the frame, and fills it out """
     def __init__(self, parent, id, title):
         """ Constructor for frame"""
         self = read_config(self)
