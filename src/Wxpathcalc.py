@@ -85,6 +85,7 @@ class pathcalc_wx(wx.Frame):
         self.initialize()
 
     def initialize(self):
+        """ initialize all the elements """
         sizer = wx.GridBagSizer()
         self.Quit = wx.Button(self, id=-1, label=u"Quit")
         self.Quit.Bind(wx.EVT_BUTTON, self.QuitClick)
