@@ -89,9 +89,9 @@ class PathCalc(object):
         Tk.Label(root, textvariable=var).pack()
         for variable in self.settings:
             _min, _max = getattr(self, variable).split(',')
-            slider = Tk.Scale(root, label=variable, from_= _min,
-                     to=_max, resolution=0.1, orient='horizontal',
-                     length=250, command=variable)
+            slider = Tk.Scale(root, label=variable, from_=_min,
+                              to=_max, resolution=0.1, orient='horizontal',
+                              length=250, command=variable)
             slider.pack()
 
         Tk.Button(root, text="Quit", command=root.quit).pack()
@@ -107,27 +107,21 @@ class PathCalc(object):
         self.lambdaCalc()
         self. pathloss()
 
-
-
     def lambdaCalc(self):
         """ Calculating lambda (wavelength) """
         log.debug('in lambdaCalc')
         self._lambda = 300.00/self.freq
         print self._lambda
 
-
-
     def threedb_theta(self, freq, para_dia):
         """ Calculating the 3db theta point """
         log.debug('In threedb_theta')
         self.threedb_theta = 22.00/freq*para_dia
 
-
     def paraGain(self, dia, freq):
         """ Calculating the dish gain per side """
         log.debug('in paraGain calculation')
         self.para_gain = (20*math.log(10, dia)+(20*math.log(10, freq)+17.8))
-
 
     def pathloss(self, path_length, freq):
         """ Calculate the full path loss """
