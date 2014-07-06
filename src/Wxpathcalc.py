@@ -79,7 +79,7 @@ class pathcalc_wx(wx.Frame):
     """ Base class, builds the frame, and fills it out """
     def __init__(self, parent, id, title):
         """ Constructor for frame"""
-        self = read_config(self)
+        self.config = read_config(self)
         wx.Frame.__init__(self, parent, id, title)
         self.parent = parent
         self.initialize()
