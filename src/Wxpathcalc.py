@@ -79,13 +79,16 @@ class pathcalc_wx(wx.Frame):
     """ Base class, builds the frame, and fills it out """
     def __init__(self, parent, id, title):
         """ Constructor for frame"""
+        log.debug('in constructor')
         self.config = read_config(self)
         wx.Frame.__init__(self, parent, id, title)
         self.parent = parent
         self.initialize()
+        log.debug('leaving constructor')
 
     def initialize(self):
         """ initialize all the elements """
+        log.debug('Initialize object')
         sizer = wx.GridBagSizer()
         sizer.Quit = wx.Button(self, id=-1, label=u"Quit")
         sizer.Quit.Bind(wx.EVT_BUTTON, self.QuitClick)
@@ -95,6 +98,7 @@ class pathcalc_wx(wx.Frame):
             # now we add sliders ..
             pass
         self.Show(True)
+        log.debug('Finished initialize of object')
 
     def QuitClick(self, event):
         self.Close()
