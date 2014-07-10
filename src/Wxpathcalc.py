@@ -81,6 +81,7 @@ class Knob:
     """
 
     def setKnob(self, value):
+        """ Base class is for documentation purposes."""
         pass
 
 
