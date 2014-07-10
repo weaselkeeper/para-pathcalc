@@ -101,6 +101,7 @@ class pathcalc_wx(wx.Frame):
         log.debug('Finished initialize of object')
 
     def QuitClick(self, event):
+        log.debug('Quit triggered by event %s', event)
         self.Close()
 
 
