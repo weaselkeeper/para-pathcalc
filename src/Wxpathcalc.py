@@ -1,47 +1,47 @@
-#!/usr/bin/python
-# -*- coding: iso-8859-1 -*-
+#!/usr/bin/env python
+
 #
-##
-##Copyright (C) 2000 Jim Richardson
-##email weaselkeeper@gmail.com
-##
-## This program is free software; you can redistribute it and/or
-## modify it under the terms of the GNU General Public License
-## as published by the Free Software Foundation; either version 2
-## of the License, or (at your option) any later version.
-##
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-##
-## You should have received a copy of the GNU General Public License
-## along with this program; if not, write to the Free Software
-## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
-##  02111-1307, USA.
-##
-##This program is a simple calculator for some basic parabolic
-##antenna equations. It's crude, but at least seems bug free. It
-##makes a few assumptions, first that the numbers are all related
-##to free space, so any atmospheric losses, including rain fade
-##must be calculated seperately (I may add this at a future time)
-##Second, it assumes that you know not to use dumb combinations of
-##numbers, like a parabolic dish of 10cm, with a freq of 100Mhz.
-##The numbers generated in such a combo are mathematically
-##correct, and in practical terms, bogus.
-##I also assume that both antennas are the same diameter, this
-##will change in future revisions.
-##
-##Most of the calculations come from a GTE microwave journal
-##that is over 30 years old :) Information is forever.
-##
-##Comments, bug notices, feature lists are welcome at
-##weaselkeeper@gmail.com, please direct flames to /dev/null, I will...
+#Copyright (C) 2000 Jim Richardson
+#email weaselkeeper@gmail.com
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+#  02111-1307, USA.
+#
+# This program is a simple calculator for some basic parabolic
+# antenna equations. It's crude, but at least seems bug free. It
+# makes a few assumptions, first that the numbers are all related
+# to free space, so any atmospheric losses, including rain fade
+# must be calculated seperately (I may add this at a future time)
+# Second, it assumes that you know not to use dumb combinations of
+# numbers, like a parabolic dish of 10cm, with a freq of 100Mhz.
+# The numbers generated in such a combo are mathematically
+# correct, and in practical terms, bogus.
+# I also assume that both antennas are the same diameter, this
+# will change in future revisions.
+#
+# Most of the calculations come from a GTE microwave journal
+# that is over 30 years old :) Information is forever.
+#
+# Comments, bug notices, feature lists are welcome at
+# weaselkeeper@gmail.com, please direct flames to /dev/null, I will...
 #
 
 
 # Reimplementation of pathcalc in python+Wx
 #
+
 """
 License: GPL V2 See LICENSE file
 Author: Jim Richardson
@@ -74,6 +74,44 @@ console.setLevel(logging.WARN)
 logging.getLogger(PROJECTNAME).addHandler(console)
 log = logging.getLogger(PROJECTNAME)
 
+
+class Knob:
+    """
+    Twiddle the knob, and it moves a param, and the param class will do the rest
+    """
+
+    def setKnob(self, value):
+        pass
+
+
+
+class Param:
+    """Any given parameter may affect multiple objects, and may be affected by
+    multiple adjusters, this class abstracts that."""
+
+    def __init__(self, initialVal=None, minimum=0, maximum=1):
+        self.minimum = minimum
+        self.maximum = maximum
+        if initialVal != self.constrain(initialVal):
+            raise ValueError('illegal initial value')
+
+    def attach(self, knob):
+    	self.knobs += [knob]
+
+    def set(self, value, knobe=None):
+    	self.value = value
+    	self.value = self.constrain(value)
+    	for feedbackKnob in self.knobs:
+    		if feedbackKnob != knob:
+    			feedbackKnob.setKnob(self.value)
+    		return self.value
+
+    def constrain(self, value):
+    	if value <= self.minimum:
+    		value = self.minimum
+    	if value >= self.maximum:
+    		value = self.maximum
+    	return value
 
 class pathcalc_wx(wx.Frame):
     """ Base class, builds the frame, and fills it out """
