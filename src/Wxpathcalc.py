@@ -96,22 +96,22 @@ class Param:
             raise ValueError('illegal initial value')
 
     def attach(self, knob):
-    	self.knobs += [knob]
+        self.knobs += [knob]
 
     def set(self, value, knobe=None):
-    	self.value = value
-    	self.value = self.constrain(value)
-    	for feedbackKnob in self.knobs:
-    		if feedbackKnob != knob:
-    			feedbackKnob.setKnob(self.value)
-    		return self.value
+        self.value = value
+        self.value = self.constrain(value)
+        for feedbackKnob in self.knobs:
+                if feedbackKnob != knob:
+                        feedbackKnob.setKnob(self.value)
+                return self.value
 
     def constrain(self, value):
-    	if value <= self.minimum:
-    		value = self.minimum
-    	if value >= self.maximum:
-    		value = self.maximum
-    	return value
+        if value <= self.minimum:
+                value = self.minimum
+        if value >= self.maximum:
+                value = self.maximum
+        return value
 
 class pathcalc_wx(wx.Frame):
     """ Base class, builds the frame, and fills it out """
