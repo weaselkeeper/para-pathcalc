@@ -99,7 +99,7 @@ class Param:
     def attach(self, knob):
         self.knobs += [knob]
 
-    def set(self, value, knobe=None):
+    def set(self, value, knob=None):
         self.value = value
         self.value = self.constrain(value)
         for feedbackKnob in self.knobs:
