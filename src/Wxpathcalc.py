@@ -77,13 +77,12 @@ log = logging.getLogger(PROJECTNAME)
 
 class Knob:
     """
-    Twiddle the knob, and it moves a param, and the param class will do the rest
-    """
+    Twiddle the knob, and it moves a param, and the param class will do the
+    rest """
 
     def setKnob(self, value):
         """ Base class is for documentation purposes."""
         pass
-
 
 
 class Param:
@@ -113,6 +112,7 @@ class Param:
         if value >= self.maximum:
             value = self.maximum
         return value
+
 
 class pathcalc_wx(wx.Frame):
     """ Base class, builds the frame, and fills it out """
