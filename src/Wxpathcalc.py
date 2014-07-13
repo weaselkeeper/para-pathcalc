@@ -96,6 +96,7 @@ class Param:
             raise ValueError('illegal initial value')
 
     def attach(self, knob):
+        """ Create the knob attachment"""
         self.knobs += [knob]
 
     def set(self, value, knob=None):
