@@ -120,7 +120,6 @@ class pathcalc_wx(wx.Frame):
     def __init__(self, parent, id, title):
         """ Constructor for frame"""
         log.debug('in constructor')
-        self.config = read_config(self)
         wx.Frame.__init__(self, parent, id, title)
         self.parent = parent
         self.initialize()
@@ -134,9 +133,6 @@ class pathcalc_wx(wx.Frame):
         sizer.Quit.Bind(wx.EVT_BUTTON, self.QuitClick)
         sizer.Quit.SetToolTip(wx.ToolTip("Click to quit"))
         self.SetSizerAndFit(sizer)
-        for variable in self.settings:
-            # now we add sliders ..
-            pass
         self.Show(True)
         log.debug('Finished initialize of object')
 
@@ -152,41 +148,12 @@ def get_options():
     import argparse
     parser = argparse.ArgumentParser(
         description='This is a Parabolic dish path calculator.')
-    parser.add_argument('-f', '--file', action='store', default=None,
-        help='Input file', dest='inputfile')
-    parser.add_argument('-c', '--config', action='store', help='Config file')
     parser.add_argument('-d', '--debug', action='store_true',
         help='enable debugging')
     _args = parser.parse_args()
     _args.usage = PROJECTNAME + ".py [options]"
-
-    # If we specify a config, then we use it, if not, we go with supplied
-    # options
     log.debug('leaving get_options')
     return _args
-
-
-def read_config(_object):
-    """ We will now pass the config settings into the object """
-    log.debug('In read_config')
-    configfile = os.path.join('/etc', PROJECTNAME, PROJECTNAME + '.conf')
-    config = ConfigParser.SafeConfigParser()
-    if args.config:
-        _config = args.config
-        config.read(_config)
-    else:
-        if os.path.isfile(configfile):
-            config.read(configfile)
-        else:
-            log.warn('No config file found, continue with args passed')
-            sys.exit(1)
-
-    items = config.options('sliders')
-    _object.settings = items
-    for item in items:
-        value = config.get('sliders', item)
-        setattr(_object, item, value)
-    return _object
 
 
 if __name__ == "__main__":
