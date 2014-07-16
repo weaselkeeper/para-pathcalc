@@ -115,6 +115,40 @@ class Param:
         return value
 
 
+class SliderGroup(Knob):
+    def __init__(self, parent, label, param):
+        self.sliderLabel = wx.StaticText(parent, label=label)
+        self.sliderText = wx.TextCtrl(parent, -1, style=wx.TE_PROCESS_ENTER)
+        self.slider = wx.Slider(parent, -1)
+        self.slider.SetMax(param.maximum*1000)
+        self.setKnob(param.value)
+
+        sizer = wx.BoxSizer(wx.HORIZONTAL)
+        sizer.Add(self.sliderLabel, 0, wx.EXPAND | wx.ALIGN_CENTER | wx.ALL, border=2)
+        sizer.Add(self.sliderText, 0, wx.EXPAND | wx.ALIGN_CENTER | wx.ALL, border=2)
+        sizer.Add(self.slider, 1, wx.EXPAND)
+        self.sizer = sizer
+
+        self.slider.Bind(wx.EVT_SLIDER, self.sliderHandler)
+        self.sliderText.Bind(wx.EVT_TXT_ENTER, self.sliderTextHandler)
+
+        self.param = param
+        self.param.attach(self)
+
+    def sliderHandler(self, evt):
+        value = evt.GetInt() / 1000
+        self.param.set(value)
+
+    def sliderTextHandler(self, evt):
+        value = float(self.sliderText.GetValue())
+        self.param.set(value)
+
+    def setKnob(self, value):
+        self.sliderText.SetValue("%g"%value)
+        self.slider.SetValue(value*1000)
+
+
+
 class pathcalc_wx(wx.Frame):
     """ Base class, builds the frame, and fills it out """
     def __init__(self, parent, id, title):
