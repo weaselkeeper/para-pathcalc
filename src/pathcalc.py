@@ -82,7 +82,7 @@ class PathCalc(object):
     def run(self):
         """ Execute the run method """
         log.debug('In run()')
-        """ Draw the canvas """
+        # Draw the canvas
         root = Tk.Tk()
         var = Tk.StringVar()
         var.set(self.title)
