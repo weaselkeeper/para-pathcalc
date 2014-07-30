@@ -68,6 +68,11 @@ logging.getLogger(PROJECTNAME).addHandler(console)
 log = logging.getLogger(PROJECTNAME)
 
 
+# set up some default settings, use if no config presented.
+defaults = {'dia':1,'freq':2500,'path':2}
+print defaults
+
+
 #set upper and lower limits for freq, path length etc
 #
 
