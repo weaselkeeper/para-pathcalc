@@ -69,7 +69,7 @@ log = logging.getLogger(PROJECTNAME)
 
 
 # set up some default settings, use if no config presented.
-defaults = {'dia':1,'freq':2500,'path':2}
+defaults = {'dia': (0.1, 1), 'freq': (0.1, 10), 'path': (0.05, 10.0), 'lambda': (0, 50)}
 print defaults
 
 
