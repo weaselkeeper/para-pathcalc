@@ -144,8 +144,6 @@ foreach widgets {min_freq_minus min_freq_plus freq max_freq_minus max_freq_plus}
 pack .freq.$widgets -side left
 }
 pack info .freq
-
-
 frame .results
 frame .results.labels
 frame .results.values
@@ -161,6 +159,14 @@ pack .results.labels -side left
 foreach titles {f_zone n_zone para_gain loss total_path_att theta lambda } {
 pack .results.labels.$titles
 	}
+
+
+
+frame .system -width 400 -height 20 -bd 10
+button .system.quit -text "quit" -command exit
+pack .system
+foreach widget {quit} { pack .system.$widget -side bottom }
+
 
 
 pack .results.values -side right
