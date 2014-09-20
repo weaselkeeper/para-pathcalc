@@ -38,3 +38,9 @@ Copyright (C) 2000 Jim Richardson
 # as part of that, I am reimplementing pathcalc.tcl in python, pathcalc.py is
 # using tkinter, and Wxpathcalc.py  is using wxWindows. Neither rewrite is
 # functional at this time, but I am learning as I go.
+
+# NOTE:  I have moved pathcalc over to the hamstuff repo 
+# https://github.com/weaselkeeper/hamstuff
+# All further devwork on pathcalc will occur on that repo, this repo is left
+# purely for archive reasons.
+
