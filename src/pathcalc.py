@@ -102,7 +102,7 @@ class PathCalc(object):
         Tk.Button(root, text="Quit", command=root.quit).pack()
         root.mainloop()
 
-    def change_freq(self, freq):
+    def change_freq(self):
         """ when freq changes, recalculate all the stuff that changes as a
         result"""
         log.debug('in change_freq')
@@ -118,19 +118,23 @@ class PathCalc(object):
         self._lambda = 300.00/self.freq
         print self._lambda
 
-    def threedb_theta(self, freq, para_dia):
+    def threedb_theta(self):
         """ Calculating the 3db theta point """
         log.debug('In threedb_theta')
-        self.threedb_theta = 22.00/freq*para_dia
+        self.threedb_theta = 22.00/self.freq*self.para_dia
 
-    def paraGain(self, dia, freq):
+    def paraGain(self):
         """ Calculating the dish gain per side """
         log.debug('in paraGain calculation')
-        self.para_gain = (20*math.log(10, dia)+(20*math.log(10, freq)+17.8))
+        self.para_gain = (20*math.log(10, self.dia)+(20*math.log(10, self.freq)+17.8))
 
-    def pathloss(self, path_length, freq):
+    def pathloss(self):
         """ Calculate the full path loss """
-        self.path_loss = (92.4+20*math.log(10, freq)+20*math.log(10, path_length))
+        self.path_loss = (92.4+20*math.log(10, self.freq)+20*math.log(10, self.path_length))
+
+    def pathgain(self):
+        """ Calc total path gain """
+        self.path_gain = self.path_loss + self.para_gain
 
 
 def get_options():
