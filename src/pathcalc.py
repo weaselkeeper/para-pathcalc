@@ -52,8 +52,8 @@ PROJECTNAME = 'pathcalc'
 
 import sys
 import os
-import ConfigParser
-import Tkinter as Tk
+import configparser
+import tkinter as Tk
 import logging
 import math
 # Setup logging
@@ -70,7 +70,7 @@ log = logging.getLogger(PROJECTNAME)
 
 # set up some default settings, use if no config presented.
 defaults = {'dia': (0.1, 1), 'freq': (0.1, 10), 'path': (0.05, 10.0), 'lambda': (0, 50)}
-print defaults
+print(defaults)
 
 
 #set upper and lower limits for freq, path length etc
@@ -116,7 +116,7 @@ class PathCalc(object):
         """ Calculating lambda (wavelength) """
         log.debug('in lambdaCalc')
         self._lambda = 300.00/self.freq
-        print self._lambda
+        print(self._lambda)
 
     def threedb_theta(self):
         """ Calculating the 3db theta point """
@@ -162,7 +162,7 @@ def read_config(_object):
     """ We will now pass the config settings into the object """
     log.debug('In read_config')
     configfile = os.path.join('/etc', PROJECTNAME, PROJECTNAME + '.conf')
-    config = ConfigParser.SafeConfigParser()
+    config = configparser.ConfigParser()
     if args.config:
         _config = args.config
         config.read(_config)
